@@ -1,30 +1,64 @@
 <template>
   <div id="app">
     <!-- Nav -->
-    <nav class="c-nav">
-      <ul class="c-nav-list">
-        <li class="c-nav-list-item">Home</li>
-        <li class="c-nav-list-item">Contact</li>
-      </ul>
-    </nav>
+    <Navigation />
 
     <!-- Content -->
     <h1>Eurosong Festival</h1>
 
-    <div class="c-feedback warning">Er is een fout gebeurd</div>
-    <div class="c-feedback error">'T is kapot</div>
-    <div class="c-feedback success">Het werkt</div>
+    <Feedback 
+    v-for="(message, index) in messages" 
+    :key="index"
+    :message="message.message"
+    :classType="message.classType" />
     
+    <button @click="addMessage">Add Message</button>
+
   </div>
 </template>
 
 <script>
-// Import styling for the whole app
+// Styling
 import style from './scss/style.scss';
+
+// Components
+import Navigation from './components/Navigation.vue';
+import Feedback from './components/Feedback.vue';
 
 export default {
   name: 'App',
+  components: {
+    Navigation,
+    Feedback
+  },
+  data(){
+    return {
+      messages: [
+        {
+          message: "Er is een fout",
+          classType: "warning"
+        },
+        {
+          message: "'T is kapot",
+          classType: "error"
+        },
+        {
+          message: "Het werkt",
+          classType: "success"
+        }
+      ]
+    }
+  },
+  methods: {
+    addMessage() {
+      this.messages.push(
+        {
+          message: "Nieuw Feedback Item",
+          classType: "success"
+        }
+      )
+    }
+  }
   
 }
 </script>
-
