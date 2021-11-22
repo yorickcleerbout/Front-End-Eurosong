@@ -18,8 +18,8 @@
 </template>
 
 <script>
-// Styling
-import style from './scss/style.scss';
+// // Styling
+// import style from './scss/style.scss';
 
 // Components
 import Navigation from './components/Navigation.vue';
@@ -62,3 +62,6 @@ export default {
   
 }
 </script>
+<style lang="scss">
+  @import './scss/style.scss';
+</style>
