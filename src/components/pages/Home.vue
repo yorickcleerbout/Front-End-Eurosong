@@ -1,11 +1,13 @@
 <template>
     <div>
-        <h1>
-          Eurosong Voting App
-        </h1>
-
-        <button @click="goToPage('game')">Show Game</button>
-        <button @click="goToPage('ranking')">Show Ranking</button>
+        <div class="container">
+            <img id="logo" src="../../assets/logo.png">
+        </div>
+        <div class="btn-group">
+            <button class="btn draw-border" @click="goToPage('game')">Show Game</button>
+            <button class="btn draw-border" @click="goToPage('ranking')">Show Ranking</button>
+        </div>
+        
     </div>
 </template>
 
