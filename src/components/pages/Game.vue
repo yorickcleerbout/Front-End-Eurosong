@@ -1,6 +1,14 @@
 <template>
     <div>
-        <button @click="goToPage('home')">Go To Home</button>
+        <!--  Navigation -->
+        <nav>
+            <img src="../../assets/logoblack.png" width="150"/>
+            <ul>
+                <li @click="goToPage('home')">Home</li>
+                <li @click="goToPage('ranking')">Ranking</li>
+            </ul>
+        </nav>
+        
         <h1>Game</h1>
         
         <!-- Carousel -->
