@@ -126,6 +126,10 @@ export default {
             });
             
             this.postVote(points);
+
+            let activeVotes = votes.filter((vote) => vote.isVoted == true);
+            
+            if (activeVotes.length == votes.length) this.goToPage("ranking");
         }
 
 
