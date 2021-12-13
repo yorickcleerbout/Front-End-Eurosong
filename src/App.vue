@@ -1,25 +1,14 @@
 <template>
   <div id="app">
     <!-- Home Page -->
-    <div v-if="page == 'home'">
-        <h1>
-          Eurosong Voting App
-        </h1>
-
-        <button @click="goToGame">Show Game</button>
-        <button @click="goToRanking">Show Ranking</button>
-    </div>
-    
+    <Homepage v-if="page == 'home'" @change-page="goToPage"/>
 
     <!-- Game -->
-    <div v-if="page == 'game'">
-      <h1>Game</h1>
-    </div>
+    <Gamepage v-if="page == 'game'" @change-page="goToPage"/>
 
     <!-- Ranking -->
-    <div v-if="page == 'ranking'">
-      <h1>Ranking</h1>
-    </div>
+    <Rankingpage v-if="page == 'ranking'" @change-page="goToPage"/>
+    
 
 
   </div>
@@ -27,13 +16,17 @@
 
 <script>
 
-// Components
-//import Feedback from './components/Feedback.vue';
+// Pages
+import Homepage from './components/pages/Home.vue';
+import Gamepage from './components/pages/Game.vue';
+import Rankingpage from './components/pages/Ranking.vue';
 
 export default {
   name: 'App',
   components: {
-  
+    Homepage,
+    Gamepage,
+    Rankingpage
   },
   data(){
     return {
@@ -41,12 +34,8 @@ export default {
     }
   },
   methods: {
-    goToGame() {
-      this.page = "game";
-    },
-
-    goToRanking() {
-      this.page = "ranking";
+    goToPage(page) {
+      this.page = page;
     }
   }
   
