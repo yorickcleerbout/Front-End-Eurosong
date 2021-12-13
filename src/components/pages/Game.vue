@@ -92,7 +92,7 @@ export default {
         postVote(points) {
             const songID = this.songs[this.activeSongIndex].id;
             const url = "http://webservies.be/eurosong/Votes";
-
+            // ip grabber https://api.ipify.org/?format=jsonp&callback=getIP
             fetch(url, {
                 method: "POST",
                 headers: {
