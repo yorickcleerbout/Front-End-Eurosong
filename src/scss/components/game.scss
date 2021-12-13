@@ -18,3 +18,21 @@ nav {
         }
   }
 }
+
+.center {
+    position: absolute;
+    text-align: center;
+    top: 15%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.carousel {
+    display: flex;
+    justify-content: space-around;
+
+    img {
+        cursor: pointer;
+    }
+    
+}

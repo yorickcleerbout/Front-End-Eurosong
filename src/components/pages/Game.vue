@@ -8,31 +8,46 @@
                 <li @click="goToPage('ranking')">Ranking</li>
             </ul>
         </nav>
-        
-        <h1>Game</h1>
-        
-        <!-- Carousel -->
-        <Carousel :items="songs" :activeIndex="activeSongIndex" @change-index="changeActiveSongIndex" />
-
-        <div v-for="(vote, index) in votes" :key="index">
-            <button v-if="!vote.isVoted"  @click="addVote(vote.points)">
-                Add {{ vote.points }} points
-            </button>
+        <div class="center">
+            <h1><u>Voting Game</u></h1>
+            
+            
+            <!-- Carousel -->
+            <Carousel :items="songs" :activeIndex="activeSongIndex" @change-index="changeActiveSongIndex" />
+           
+            
+            <div class="btn-group">
+                <div v-for="(vote, index) in votes" :key="index">
+                    <button class="btn draw-border" v-if="!vote.isVoted"  @click="addVote(vote.points)">
+                        Add {{ vote.points }} points
+                    </button>
+                </div>
+            </div>
+            <Feedback :message="note.msg" :classType="note.classType" />
+            
+            
         </div>
+        
     </div>
 </template>
 
 <script>
 // Components
 import Carousel from '../Carousel.vue';
+import Feedback from '../Feedback.vue';
 
 export default {
     name: "Gamepage",
     components: {
-        Carousel
+        Carousel,
+        Feedback
     },
     data() {
         return {
+            note: {
+                msg: "Note: You can only use each amount of points once.",
+                classType: "warning"
+            },
             songs: [],
             activeSongIndex: 0,
             votes: [
@@ -53,7 +68,8 @@ export default {
                     isVoted: false
                 },
                 
-            ]
+            ],
+            ip: null
         }
     },
     mounted() {
@@ -100,7 +116,16 @@ export default {
         postVote(points) {
             const songID = this.songs[this.activeSongIndex].id;
             const url = "http://webservies.be/eurosong/Votes";
-            // ip grabber https://api.ipify.org/?format=jsonp&callback=getIP
+
+            // IP Grabber
+            // fetch("https://api.ipify.org/?format=jsonp&callback=getIP")
+            // .then((response) => {
+            //     return response.json();
+            // }).then((ipObj) => {
+            //     this.ip = ipObj.ip;
+            // });
+
+            
             fetch(url, {
                 method: "POST",
                 headers: {
@@ -109,7 +134,8 @@ export default {
                 },
                 body: JSON.stringify({
                     songID: songID,
-                    points: points
+                    points: points,
+                    ip: this.ip
                 })
             })
             .then((response) => {

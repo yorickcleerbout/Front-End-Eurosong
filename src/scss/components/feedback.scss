@@ -9,14 +9,17 @@
 .c-feedback {
     &.warning {
         @include alert(255, 165, 80);
+        font-weight: bold;
     }
 
     &.error {
         @include alert(255, 80, 80);
+        font-weight: bold;
     }
     
     &.success {
         @include alert(0, 255, 0);
+        font-weight: bold;
     }
 }
 

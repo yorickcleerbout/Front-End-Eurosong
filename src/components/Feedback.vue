@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div :class="'c-feedback ' + classType" v-if="isActive" @click="hide">{{ message }} </div>
+        <div :class="'c-feedback ' + classType" v-if="isActive">{{ message }} </div>
 
     </div>
 </template>
