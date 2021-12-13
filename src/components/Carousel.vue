@@ -1,8 +1,12 @@
 <template>
     <div>
-        <div v-for="song in items" :key="song.id">
-            {{ song.artist.name }} - {{ song.title }}
+        <button @click="changeIndex(-1)">Previous Song</button>
+        <div v-for="(song, index) in items" :key="song.id">
+            <div v-if="index == activeIndex">
+                {{ song.artist.name }} - {{ song.title }}
+            </div>
         </div>
+        <button @click="changeIndex(1)">Next Song</button>
     </div>
 </template>
 
@@ -10,7 +14,20 @@
 export default {
     name: "Carousel",
     props: [
-        "items"
-    ]
+        "items",
+        "activeIndex"
+    ],
+    methods: {
+        changeIndex(value) {
+            let index = this.activeIndex;
+
+            index += value;
+
+            if (index < 0) index = this.items.length -1;
+            else if (index == this.items.length) index = 0;
+
+            this.$emit('change-index', index);
+        }
+    }
 }
 </script>

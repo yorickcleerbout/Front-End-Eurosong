@@ -1,10 +1,16 @@
 <template>
     <div>
-        <h1>Game</h1>
         <button @click="goToPage('home')">Go To Home</button>
-
+        <h1>Game</h1>
         
-        <Carousel :items="songs"/>
+        <!-- Carousel -->
+        <Carousel :items="songs" :activeIndex="activeSongIndex" @change-index="changeActiveSongIndex" />
+
+        <div v-for="(vote, index) in votes" :key="index">
+            <button v-if="!vote.isVoted"  @click="addVote(vote.points)">
+                Add {{ vote.points }} points
+            </button>
+        </div>
     </div>
 </template>
 
@@ -19,7 +25,27 @@ export default {
     },
     data() {
         return {
-            songs: []
+            songs: [],
+            activeSongIndex: 0,
+            votes: [
+                {
+                    points: 1,
+                    isVoted: false
+                },
+                {
+                    points: 2,
+                    isVoted: false
+                },
+                {
+                    points: 4,
+                    isVoted: false
+                },
+                {
+                    points: 8,
+                    isVoted: false
+                },
+                
+            ]
         }
     },
     mounted() {
@@ -34,6 +60,7 @@ export default {
         goToPage(page) {
             this.$emit("change-page", page);
         },
+
         // Data Methods
         fetchSongs() {
             const url = "http://webservies.be/eurosong/Songs";
@@ -45,6 +72,7 @@ export default {
                     this.fetchArtists(songs);
                 });
         },
+
         fetchArtists(songs) {
             const url = "http://webservies.be/eurosong/Artists";
             fetch(url)
@@ -59,6 +87,45 @@ export default {
                     });
                     this.songs = songs;
                 });
+        },
+
+        postVote(points) {
+            const songID = this.songs[this.activeSongIndex].id;
+            const url = "http://webservies.be/eurosong/Votes";
+
+            fetch(url, {
+                method: "POST",
+                headers: {
+                    'Accept': 'application/json, text/plain',
+                    'Content-Type': 'application/json;charset=UTF-8'
+                },
+                body: JSON.stringify({
+                    songID: songID,
+                    points: points
+                })
+            })
+            .then((response) => {
+                return response.json();
+            })
+            .then((result) => {
+                console.log(result);
+            });
+        },
+
+        // Logic Methods
+        changeActiveSongIndex(index) {
+            this.activeSongIndex = index;
+        },
+
+        addVote(points) {
+            let votes = this.votes;
+
+            votes.map((vote) => {
+                if(vote.points == points) vote.isVoted = true;
+                return vote;
+            });
+            
+            this.postVote(points);
         }
 
 
