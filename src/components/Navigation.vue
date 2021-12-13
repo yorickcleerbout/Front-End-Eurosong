@@ -1,6 +1,6 @@
 <template>
     <nav class="c-nav">
-        <span> {{ companyName }}</span>
+      
       <ul class="c-nav-list">
         <li class="c-nav-list-item" v-for="(link, index) in links" v-bind:key="index">
             <a v-bind:href="link.linkUrl" v-bind:target="link.target">{{ link.linkText }}</a>
