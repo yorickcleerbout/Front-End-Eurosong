@@ -1,62 +1,52 @@
 <template>
   <div id="app">
-    <!-- Nav -->
-    <Navigation />
+    <!-- Home Page -->
+    <div v-if="page == 'home'">
+        <h1>
+          Eurosong Voting App
+        </h1>
 
-    <!-- Content -->
-    <h1>Eurosong Festival</h1>
-
-    <Feedback 
-    v-for="(message, index) in messages" 
-    :key="index"
-    :message="message.message"
-    :classType="message.classType" />
+        <button @click="goToGame">Show Game</button>
+        <button @click="goToRanking">Show Ranking</button>
+    </div>
     
-    <button @click="addMessage">Add Message</button>
+
+    <!-- Game -->
+    <div v-if="page == 'game'">
+      <h1>Game</h1>
+    </div>
+
+    <!-- Ranking -->
+    <div v-if="page == 'ranking'">
+      <h1>Ranking</h1>
+    </div>
+
 
   </div>
 </template>
 
 <script>
-// // Styling
-// import style from './scss/style.scss';
 
 // Components
-import Navigation from './components/Navigation.vue';
-import Feedback from './components/Feedback.vue';
+//import Feedback from './components/Feedback.vue';
 
 export default {
   name: 'App',
   components: {
-    Navigation,
-    Feedback
+  
   },
   data(){
     return {
-      messages: [
-        {
-          message: "Er is een fout",
-          classType: "warning"
-        },
-        {
-          message: "'T is kapot",
-          classType: "error"
-        },
-        {
-          message: "Het werkt",
-          classType: "success"
-        }
-      ]
+      page: "home"
     }
   },
   methods: {
-    addMessage() {
-      this.messages.push(
-        {
-          message: "Nieuw Feedback Item",
-          classType: "success"
-        }
-      )
+    goToGame() {
+      this.page = "game";
+    },
+
+    goToRanking() {
+      this.page = "ranking";
     }
   }
   
