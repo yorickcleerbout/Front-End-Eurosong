@@ -1,7 +1,14 @@
 <template>
     <div>
-        <h1>Ranking</h1>
-      <button @click="goToPage('home')">Go To Home</button>
+        <!--  Navigation -->
+        <nav>
+            <img src="../../assets/logoblack.png" width="150"/>
+            <ul>
+                <li @click="goToPage('home')">Home</li>
+                <li @click="goToPage('game')">Voting Game</li>
+                <li @click="goToPage('ranking')">Ranking</li>
+            </ul>
+        </nav>
     </div>
 </template>
 
