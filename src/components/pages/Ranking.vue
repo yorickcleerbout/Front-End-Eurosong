@@ -9,12 +9,17 @@
                 <li @click="goToPage('ranking')">Ranking</li>
             </ul>
         </nav>
+
     </div>
 </template>
 
 <script>
+
 export default {
     name: "Rankingpage",
+    components: [
+        
+    ],
     methods: {
         goToPage(page) {
             this.$emit("change-page", page);
