@@ -93,7 +93,8 @@ export default {
                     return response.json();
                 })
                 .then((songs) => {
-                    this.fetchArtists(songs);
+                    let correctSongs = songs.filter(song => song.spotify != "string");
+                    this.fetchArtists(correctSongs);
                 });
         },
 
