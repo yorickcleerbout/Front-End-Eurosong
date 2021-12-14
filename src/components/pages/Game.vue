@@ -119,32 +119,32 @@ export default {
             const url = "http://webservies.be/eurosong/Votes";
 
             // IP Grabber
-            // fetch("https://api.ipify.org/?format=jsonp&callback=getIP")
-            // .then((response) => {
-            //     return response.json();
-            // }).then((ipObj) => {
-            //     this.ip = ipObj.ip;
-            // });
+            fetch('https://api.ipify.org?format=json')
+                .then(x => x.json())
+                .then(({ ip }) => {
+                    this.ip = ip;
+                    fetch(url, {
+                        method: "POST",
+                        headers: {
+                            'Accept': 'application/json, text/plain',
+                            'Content-Type': 'application/json;charset=UTF-8'
+                        },
+                        body: JSON.stringify({
+                            songID: songID,
+                            points: points,
+                            ip: this.ip
+                        })
+                    })
+                    .then((response) => {
+                        return response.json();
+                    })
+                    .then((result) => {
+                        console.log(result);
+                    });
+            });
 
             
-            fetch(url, {
-                method: "POST",
-                headers: {
-                    'Accept': 'application/json, text/plain',
-                    'Content-Type': 'application/json;charset=UTF-8'
-                },
-                body: JSON.stringify({
-                    songID: songID,
-                    points: points,
-                    ip: this.ip
-                })
-            })
-            .then((response) => {
-                return response.json();
-            })
-            .then((result) => {
-                console.log(result);
-            });
+            
         },
 
         // Logic Methods

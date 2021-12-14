@@ -24,7 +24,6 @@ export default {
             let index = this.activeIndex;
 
             index += value;
-            console.log(this.items.length)
             if (index < 0) index = this.items.length -1;
             else if (index == this.items.length) index = 0;
 
