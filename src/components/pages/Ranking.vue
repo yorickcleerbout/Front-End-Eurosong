@@ -9,7 +9,7 @@
                 <li @click="goToPage('ranking')">Ranking</li>
             </ul>
         </nav>
-
+        
     </div>
 </template>
 
