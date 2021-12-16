@@ -10,7 +10,6 @@
     <Rankingpage v-if="page == 'ranking'" @change-page="goToPage"/>
     
 
-
   </div>
 </template>
 

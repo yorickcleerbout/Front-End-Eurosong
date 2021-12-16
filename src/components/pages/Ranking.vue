@@ -17,9 +17,6 @@
 
 export default {
     name: "Rankingpage",
-    components: [
-        
-    ],
     methods: {
         goToPage(page) {
             this.$emit("change-page", page);
