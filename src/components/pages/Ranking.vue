@@ -15,7 +15,27 @@
                 <RankCard :song="songs[1]" :position="2"/>
                 <RankCard :song="songs[0]" :position="1"/>
                 <RankCard :song="songs[2]" :position="3"/>
+                
             </div>
+            <table>
+                <tr>
+                    <th>Place</th>
+                    <th>Title</th>
+                    <th>Artist</th>
+                    <th>Spotify</th>
+                    <th>Points</th>
+                </tr>
+                <tr v-if="index > 2" v-for="(s, index) in songs" :key="index">
+                    <td>{{ index + 1 }}</td>
+                    <td>{{ s.title }}</td>
+                    <td>{{ s.artist.name }}</td>
+                    <td><iframe :src="s.spotify" width="100%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe></td>
+                    <td>{{ s.points }}</td>
+                </tr>
+            </table>
+                
+            
+            
             
 
         </div>
