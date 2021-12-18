@@ -13,7 +13,7 @@
             <h1><u>Voting Game</u></h1>
 
             <!-- VoteCard -->
-            <VoteCard :items="songs" :activeIndex="activeSongIndex" @change-index="changeActiveSongIndex" />
+            <VoteCard :items="songs" :points="songPoints" :activeIndex="activeSongIndex" @change-index="changeActiveSongIndex" />
            
             
             <div class="btn-group">
@@ -52,6 +52,7 @@ export default {
                 classType: "warning"
             },
             songs: [],
+            songPoints: [],
             activeSongIndex: 0,
             votes: [
                 {
@@ -98,6 +99,11 @@ export default {
                 .then((songs) => {
                     let correctSongs = songs.filter(song => song.spotify != "string");
                     this.fetchArtists(correctSongs);
+                    let songIDS = [];
+                    correctSongs.forEach(song => {
+                        songIDS.push(song.id);
+                    });
+                    this.fetchSongPoints(songIDS);
                 });
         },
 
@@ -148,6 +154,19 @@ export default {
 
             
             
+        },
+
+        fetchSongPoints(songIDS) {
+            songIDS.forEach(id => {
+              fetch(`http://webservies.be/eurosong/Songs/${id}/points`)
+                .then((response) => {
+                        return response.json();
+                })
+                .then((points) => { 
+                    this.songPoints.push(points);
+                });
+                       
+            });           
         },
 
         // Logic Methods

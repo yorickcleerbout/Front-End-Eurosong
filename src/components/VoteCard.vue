@@ -17,7 +17,7 @@
                 </div>
 
                 <div class="color">
-                    <h3>Points: 000</h3>
+                    <h3 v-for="(point, index) in points" :key="index" v-if="index == activeIndex">Current Points: {{points[index]}}</h3>
                 </div>
 
             </div>
@@ -30,7 +30,8 @@ export default {
     name: "VoteCard",
     props: [
         "items",
-        "activeIndex"
+        "activeIndex",
+        "points"
     ],
     methods: {
         changeIndex(value) {
