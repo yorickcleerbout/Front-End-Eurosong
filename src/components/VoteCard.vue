@@ -17,7 +17,7 @@
                 </div>
 
                 <div class="color">
-                    <h3 v-for="(point, index) in points" :key="index" v-if="index == activeIndex">Current Points: {{points[index]}}</h3>
+                    <h3 v-for="(point, index) in points" :key="index" v-if="index == activeIndex">Current Points: {{ point.points}}</h3>
                 </div>
 
             </div>
