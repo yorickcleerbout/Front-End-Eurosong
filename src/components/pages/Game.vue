@@ -94,11 +94,7 @@ export default {
                 .then((songs) => {
                     let correctSongs = songs.filter(song => song.spotify != "string");
                     this.fetchArtists(correctSongs);
-                    let songIDS = [];
-                    correctSongs.forEach(song => {
-                        songIDS.push(song.id);
-                    });
-                    this.fetchSongPoints(songIDS);
+                    this.fetchVotes(correctSongs);
                 });
         },
 
@@ -151,18 +147,23 @@ export default {
             
         },
 
-        fetchSongPoints(songIDS) {
-            songIDS.forEach(id => {
-              fetch(`http://webservies.be/eurosong/Songs/${id}/points`)
+        fetchVotes(songs) {
+            const url = "http://webservies.be/eurosong/Votes";
+            fetch(url)
                 .then((response) => {
-                        return response.json();
+                    return response.json();
                 })
-                .then((points) => { 
-                    this.songPoints.push(points);
-                });
-                       
-            });  
-            console.log(this.songPoints)    // verkeerde volgorde??? 
+                .then((votes) => {
+                    songs.map(song => {
+                       const vote = votes.filter((vote) => vote.songID == song.id);
+                       song.points = 0;
+                       vote.forEach(v => {
+                           if (v.songID == song.id) song.points += v.points
+                       });
+                       return song;
+                    });
+                    this.songPoints = songs;
+                });     
         },
 
         // Logic Methods
