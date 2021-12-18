@@ -161,7 +161,8 @@ export default {
                     this.songPoints.push(points);
                 });
                        
-            });           
+            });  
+            console.log(this.songPoints)    // verkeerde volgorde??? 
         },
 
         // Logic Methods

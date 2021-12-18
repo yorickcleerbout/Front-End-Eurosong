@@ -40,7 +40,7 @@ export default {
             index += value;
             if (index < 0) index = this.items.length -1;
             else if (index == this.items.length) index = 0;
-
+            console.log(this.points)
             this.$emit('change-index', index);
         }
     }
