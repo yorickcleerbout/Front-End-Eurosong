@@ -11,10 +11,9 @@
         </nav>
         <div class="center">
             <h1><u>Voting Game</u></h1>
-            
-            
-            <!-- Carousel -->
-            <Carousel :items="songs" :activeIndex="activeSongIndex" @change-index="changeActiveSongIndex" />
+
+            <!-- VoteCard -->
+            <VoteCard :items="songs" :activeIndex="activeSongIndex" @change-index="changeActiveSongIndex" />
            
             
             <div class="btn-group">
@@ -27,21 +26,24 @@
             <Feedback :message="note.msg" :classType="note.classType" />
             
             
+            
+
+
+
         </div>
-        
     </div>
 </template>
 
 <script>
 // Components
-import Carousel from '../Carousel.vue';
 import Feedback from '../Feedback.vue';
+import VoteCard from '../VoteCard.vue';
 
 export default {
     name: "Gamepage",
     components: {
-        Carousel,
-        Feedback
+        Feedback,
+        VoteCard
     },
     data() {
         return {
@@ -140,7 +142,7 @@ export default {
                         return response.json();
                     })
                     .then((result) => {
-                        console.log(result);
+                        
                     });
             });
 
