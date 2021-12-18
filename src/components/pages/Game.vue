@@ -23,13 +23,8 @@
                     </button>
                 </div>
             </div>
-            <Feedback :message="note.msg" :classType="note.classType" />
-            
-            
-            
-
-
-
+            <Feedback :message="note.msg" :classType="note.classType" /> 
+        
         </div>
     </div>
 </template>
